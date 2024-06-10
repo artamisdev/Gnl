@@ -22,19 +22,48 @@ char    *read_function(int fd, char *storage)
         if (chars_read == 0)
             break;
         aux = storage;
-        storage = ft_strjoin(storage, buffer);
+        storage = ft_strjoin(storage, buffer); // Proteção para o malloc do strjoin
         free(aux);
     }
     free(buffer);
     return (storage);
 }
 
-int  main (void)
+static  char *catch_line(char *str)
 {
-    int fd;
-    static char *storage;
+    int     i;
+    char    *line;
 
-    fd = open ("teste.txt", O_RDONLY);
-    storage = read_function(fd, storage);
-    printf("%s", storage);
+    i = 0;
+    if (!str || str[0] == '\0')
+        return (NULL);
+    while (str[i] != '\n' && str[i] != '\0')
+        i++;
+    if (str[i] == '\n')
+      i++;
+    line = calloc(sizeof(char), i + 1);
+    if (!line)
+        return (NULL);
+    i = 0;
+    while (str[i] != '\n' && str[i] != '\0')
+    {
+        line[i] = str[i];
+        ++i;
+    }
+    if (str[i] == '\n')
+        line[i++] = '\n';
+    line[i] = '\0';
+    return (line);
+}
+
+char    *get_next_line(int fd)
+{
+    static char *storage;
+    char    *line;
+
+    storage = read_function(fd, storage);//Primeiro
+    if (!storage)
+        return(NULL);
+    line = catch_line(storage);
+    return (line);
 }

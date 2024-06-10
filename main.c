@@ -5,7 +5,7 @@
 int  main (int argc, char **argv)
 {
     if (argc < 3)
-        return (printf("No hay argumetnos necesarios"), 1);
+        return (printf("No hay argumentos necesarios"), 1);
 
     int iterations;
     int fd;
