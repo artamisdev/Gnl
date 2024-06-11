@@ -41,7 +41,7 @@ static  char *catch_line(char *str)
         i++;
     if (str[i] == '\n')
       i++;
-    line = calloc(sizeof(char), i + 1);
+    line = ft_calloc(sizeof(char), i + 1);
     if (!line)
         return (NULL);
     i = 0;
@@ -56,6 +56,24 @@ static  char *catch_line(char *str)
     return (line);
 }
 
+char    *reload_storage(char *storage)
+{
+    int     len;
+    char    *post_nl;
+
+    post_nl = ft_strchr(storage, '\n');
+    len = ft_strlen(post_nl + 1);
+    if (len == 0)
+    {
+        free(storage);
+        return (NULL);
+    }
+    ft_memmove(&storage[0], post_nl + 1, len);
+    storage[len + 1] = '\0';
+    return (storage);
+}
+
+
 char    *get_next_line(int fd)
 {
     static char *storage;
@@ -65,5 +83,12 @@ char    *get_next_line(int fd)
     if (!storage)
         return(NULL);
     line = catch_line(storage);
+    if (!line)
+    {
+        free(storage);
+        storage = NULL;
+        return (NULL);
+    }
+    storage = reload_storage(storage);
     return (line);
 }
