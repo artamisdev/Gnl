@@ -1,6 +1,14 @@
 #include "get_next_line.h"
 
 
+char *clean(char *storage, char *buffer)
+{
+    free(storage);
+    free(buffer);
+    return (NULL);
+}
+
+
 char    *read_function(int fd, char *storage)
 {
     char *buffer;
@@ -14,22 +22,14 @@ char    *read_function(int fd, char *storage)
     {
         chars_read = read (fd, buffer, BUFFER_SIZE);
         if (chars_read == -1)
-        {
-            free(storage);
-            free(buffer);
-            return (NULL);
-        }
+            return (clean(storage, buffer));
         if (chars_read == 0)
             break;
         buffer[chars_read] = '\0';
         aux = storage;
-        storage = ft_strjoin(storage, buffer); // protecao nesse join
+        storage = ft_strjoin(storage, buffer);
         if (!storage)
-        {
-            free(storage);
-            free(buffer);
-            return(NULL);
-        }
+            return (clean(storage, buffer));
         free(aux);
     }
     free(buffer);
