@@ -22,31 +22,29 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
+	char		*new_string;
 	size_t		i;
-	char		*dest;
-	const char	*source;
 
-	if (!dst && !src)
+	if (s == 0)
 		return (0);
-	dest = dst;
-	source = src;
-	if (dest > source)
+	i = ft_strlen(s);
+	if (start >= i)
 	{
-		while (len--)
-			dest[len] = source[len];
+		new_string = ft_calloc(1, 1);
+		return (new_string);
 	}
+	else if (i - start < len)
+		new_string = ft_calloc((i - start) + 1, 1);
 	else
-	{
-		i = 0;
-		while (i < len)
-		{
-			dest[i] = source[i];
-			i++;
-		}
-	}
-	return (dst);
+		new_string = ft_calloc(len + 1, 1);
+	if (new_string == 0)
+		return (0);
+	i = 0;
+	while (i < len && s[start])
+		new_string[i++] = s[start++];
+	return (new_string);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -59,8 +57,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	size_s1 = ft_strlen(s1);
 	size_s2 = ft_strlen(s2);
-	str = malloc(size_s1 + size_s2 + 1);
-	if (str == NULL)
+	str = ft_calloc((size_s1 + size_s2 + 1) , sizeof(char));
+	if (!str)
 		return (NULL);
 	i = 0;
 	j = 0;

@@ -22,7 +22,13 @@ char    *read_function(int fd, char *storage)
         if (chars_read == 0)
             break;
         aux = storage;
-        storage = ft_strjoin(storage, buffer); // Proteção para o malloc do strjoin
+        storage = ft_strjoin(storage, buffer); // protecao nesse join
+        if (!storage)
+        {
+            free(storage);
+            free(buffer);
+            return(NULL);
+        }
         free(aux);
     }
     free(buffer);
@@ -58,24 +64,21 @@ static  char *catch_line(char *str)
 
 char    *reload_storage(char *storage)
 {
-    int     len;
-    char    *post_nl;
+    int i;
+    int total_len;
+    char *sub;
 
-    post_nl = ft_strchr(storage, '\n');
-    if (!post_nl)
-    {
-        free(storage);
+    i = 0;
+    while (storage[i] != '\n' && storage[i] != '\0')
+        i++;
+    if (storage[i] == '\n')
+    i++;
+    total_len = ft_strlen(storage)- i;
+    sub = ft_substr(storage, i, total_len);
+    free(storage);
+    if (!sub)
         return (NULL);
-    }
-    len = ft_strlen(post_nl + 1);
-    if (len == 0)
-    {
-        free(storage);
-        return (NULL);
-    }
-    ft_memmove(&storage[0], post_nl + 1, len);
-    storage[len + 1] = '\0';
-    return (storage);
+    return (sub);
 }
 
 
@@ -84,7 +87,7 @@ char    *get_next_line(int fd)
     static char *storage;
     char    *line;
 
-    storage = read_function(fd, storage);//Primeiro
+    storage = read_function(fd, storage);
     if (!storage)
         return(NULL);
     line = catch_line(storage);
@@ -95,5 +98,10 @@ char    *get_next_line(int fd)
         return (NULL);
     }
     storage = reload_storage(storage);
+    if (!storage || storage[0] == '\0')
+    {
+        free(storage);
+        storage = NULL;
+    }
     return (line);
 }
