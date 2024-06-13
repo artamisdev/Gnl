@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tacampos < tacampos@student.42madrid.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/13 14:35:20 by tacampos          #+#    #+#             */
+/*   Updated: 2024/06/13 14:35:21 by tacampos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	*ft_strchr(const char *s, int c)
 {
 	int		i;
-	char	*str; 
+	char	*str;
 	char	chr;
 
 	i = 0;
@@ -24,8 +36,8 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char		*new_string;
-	size_t		i;
+	char	*new_string;
+	size_t	i;
 
 	if (s == 0)
 		return (0);
@@ -57,7 +69,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	size_s1 = ft_strlen(s1);
 	size_s2 = ft_strlen(s2);
-	str = ft_calloc((size_s1 + size_s2 + 1) , sizeof(char));
+	str = ft_calloc((size_s1 + size_s2 + 1), sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -87,15 +99,14 @@ int	ft_strlen(const char *s)
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*allocated; 
+	void	*allocated;
 	size_t	i;
 	char	*change;
 
 	allocated = malloc(count * size);
 	if (!allocated)
 		return (NULL);
-
-	change = (char*)allocated;
+	change = (char *)allocated;
 	i = 0;
 	while (i < count * size)
 	{
