@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tacampos < tacampos@student.42madrid.co    +#+  +:+       +#+        */
+/*   By: tacampos <tacampos@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 14:35:20 by tacampos          #+#    #+#             */
-/*   Updated: 2024/06/13 14:35:21 by tacampos         ###   ########.fr       */
+/*   Created: 2024/06/13 21:10:24 by tacampos          #+#    #+#             */
+/*   Updated: 2024/06/13 21:11:30 by tacampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
