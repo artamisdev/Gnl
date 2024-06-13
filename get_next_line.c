@@ -21,6 +21,7 @@ char    *read_function(int fd, char *storage)
         }
         if (chars_read == 0)
             break;
+        buffer[chars_read] = '\0';
         aux = storage;
         storage = ft_strjoin(storage, buffer); // protecao nesse join
         if (!storage)
