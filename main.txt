@@ -13,6 +13,8 @@ int  main (int argc, char **argv)
 
     iterations = atoi(argv[2]);
     fd = open (argv[1], O_RDONLY);
+    fd = open (argv[1], O_RDONLY);
+    fd = open (argv[1], O_RDONLY);
 
 
     while(iterations--)
