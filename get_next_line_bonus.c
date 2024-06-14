@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tacampos <tacampos@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 16:53:04 by tacampos          #+#    #+#             */
+/*   Updated: 2024/06/14 16:55:06 by tacampos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 char	*clean(char *storage, char *buffer)
@@ -82,8 +94,8 @@ char	*reload_storage(char *storage)
 
 char	*get_next_line(int fd)
 {
-	static char	*storage[1024];
-	char		*line;
+	static char *storage[1024];
+	char *line;
 
 	storage[fd] = read_function(fd, storage[fd]);
 	if (!storage[fd])
@@ -96,7 +108,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	storage[fd] = reload_storage(storage[fd]);
-	if (!storage[fd] || storage[0][fd] == '\0')
+	if (!storage[fd] || storage[fd][0] == '\0')
 	{
 		free(storage[fd]);
 		storage[fd] = NULL;
