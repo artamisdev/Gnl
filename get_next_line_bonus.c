@@ -6,7 +6,7 @@
 /*   By: tacampos <tacampos@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:53:04 by tacampos          #+#    #+#             */
-/*   Updated: 2024/06/14 16:55:06 by tacampos         ###   ########.fr       */
+/*   Updated: 2024/06/15 17:25:46 by tacampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,11 @@ char	*reload_storage(char *storage)
 
 char	*get_next_line(int fd)
 {
-	static char *storage[1024];
-	char *line;
+	static char	*storage[1024];
+	char		*line;
 
+	if (fd < 0)
+		return (NULL);
 	storage[fd] = read_function(fd, storage[fd]);
 	if (!storage[fd])
 		return (NULL);
